@@ -9,8 +9,6 @@ exports.authjwt = (req, res, next) => {
 
     jwt.verify(token, jwt_secret, (err, user) => {
       if (err) {
-        console.log(err.expiredAt)
-        console.log(token)
         return res.sendStatus(403);
       }
 

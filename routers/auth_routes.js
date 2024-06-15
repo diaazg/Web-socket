@@ -5,6 +5,7 @@ const jwtMiddleWar = require('../middleware/authjwt')
 
 router.post('/register',authController.register)
 router.post('/login',authController.login)
+router.post('/refresh_token',authController.refreshToken)
 router.post('/protect',jwtMiddleWar.authjwt,(req, res) => {
     // Access user info from req.user
     res.json({

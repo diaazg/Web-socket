@@ -27,8 +27,8 @@ exports.login = async(req,res,next)=>{
     try {
         const userData = req.body
         
-        const accessToken  = await AuthServices.loginUser(userData);
-        res.status(200).json({ status: true, accessToken: accessToken});
+        const tokens  = await AuthServices.loginUser(userData);
+        res.status(200).json({ status: true, accessToken: tokens.accessToken,refreshToken:tokens.refreshToken});
 
        
         
@@ -36,5 +36,18 @@ exports.login = async(req,res,next)=>{
 
         res.status(401).json({ status: false, error: error.message });
     }
+}
+
+exports.refreshToken = async(req,res,next)=>{
+      
+    try {
+        const data = req.body
+        const newAccessToken = await AuthServices.refreshToken(data)
+        res.status(200).json({ status: true, newAccessToken: newAccessToken});
+    } catch (error) {
+        res.status(401).json({ status: false, error: error.message });
+    }
+
+
 }
 
