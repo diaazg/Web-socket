@@ -7,6 +7,8 @@ const pg_host = process.env.HOST;
 
 const bcrypt_rounds = process.env.ROUNDS ;
 
+const jwt_secret = process.env.JWTSECRET
+
 
 
 module.exports = {
@@ -14,5 +16,6 @@ module.exports = {
   pg_password,
   pg_database,
   pg_host,
-  bcrypt_rounds
+  bcrypt_rounds,
+  jwt_secret
 };
