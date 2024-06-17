@@ -1,20 +1,31 @@
 const express = require('express')
-const {pool} = require(`./client`)
 const authRouter = require('./routers/auth_routes')
 const app = express();
 const port = 3000;
+const http = require('http');
+const server = http.createServer(app);
+const socketIo = require('socket.io');
+const io =  socketIo(server);
+const setupSocket = require('./services/socket') 
 
-app.use(express.json()); 
+app.use(express.json());
+
+
+
+app.use('/', authRouter)
+app.get('/chat', (req, res) => {
+  res.sendFile(__dirname + '/front/index.html');
+
+});
+
+setupSocket(io)
 
 
 
 
- app.use('/',authRouter)
 
-
-
-  app.listen(port,()=>{
-    console.log(`server is running on port : ${port}`)
-  })
+server.listen(port, () => {
+  console.log(`server is running on port : ${port}`)
+})
 
 
