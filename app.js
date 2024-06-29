@@ -4,10 +4,8 @@ const app = express();
 const port = 3000;
 const http = require('http');
 const server = http.createServer(app);
-const socketIo = require('socket.io');
-const io =  socketIo(server);
-const setupSocket = require('./services/socket') 
 
+const io = require('./services/socket') 
 app.use(express.json());
 
 
@@ -17,8 +15,20 @@ app.get('/chat', (req, res) => {
   res.sendFile(__dirname + '/front/index.html');
 
 });
+app.get('/chat2', (req, res) => {
+  res.sendFile(__dirname + '/front/second.html');
 
-setupSocket(io)
+});
+app.get('/chat3', (req, res) => {
+  res.sendFile(__dirname + '/front/third.html');
+
+});
+app.get('/chat4', (req, res) => {
+  res.sendFile(__dirname + '/front/forth.html');
+
+});
+
+io.init(server)
 
 
 
