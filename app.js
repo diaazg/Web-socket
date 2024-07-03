@@ -1,5 +1,6 @@
 const express = require('express')
 const authRouter = require('./routers/auth_routes')
+const messageRouter = require('./routers/messages_routes')
 const app = express();
 const port = 3000;
 const http = require('http');
@@ -9,8 +10,12 @@ const io = require('./services/socket')
 app.use(express.json());
 
 
+app.use('/messages',messageRouter)
 
 app.use('/', authRouter)
+
+
+
 app.get('/chat', (req, res) => {
   res.sendFile(__dirname + '/front/index.html');
 
@@ -25,6 +30,10 @@ app.get('/chat3', (req, res) => {
 });
 app.get('/chat4', (req, res) => {
   res.sendFile(__dirname + '/front/forth.html');
+
+});
+app.get('/chat5', (req, res) => {
+  res.sendFile(__dirname + '/front/phone.html');
 
 });
 
